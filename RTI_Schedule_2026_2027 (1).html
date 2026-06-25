@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026-2027 Apprentice RTI Schedule</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg1:#f7f7f5;--bg2:#f0efe9;--bg3:#e8e7e0;
+  --text:#1a1a18;--text2:#5f5e5a;--text3:#888780;
+  --bdr:rgba(0,0,0,0.12);--bdr2:rgba(0,0,0,0.22);
+  --r:8px;--rl:12px;
+  --c0:#185FA5;--c0l:#C9DEFF;
+  --c1:#0F6E56;--c1l:#C2EFE1;
+  --c2:#993C1D;--c2l:#F9D5C8;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#1e1e1c;--bg1:#252523;--bg2:#2a2a27;--bg3:#303030;
+    --text:#f0efe8;--text2:#b4b2a9;--text3:#888780;
+    --bdr:rgba(255,255,255,0.11);--bdr2:rgba(255,255,255,0.22);
+  }
+}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;font-size:14px}
+.page{max-width:1100px;margin:0 auto;padding:1.5rem 1rem 4rem}
+.hdr{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:1.25rem;padding:1rem 1.25rem;background:var(--bg);border:0.5px solid var(--bdr);border-radius:var(--rl)}
+.hdr h1{font-size:18px;font-weight:600;color:var(--text);margin-bottom:3px}
+.hdr-sub{font-size:12px;color:var(--text3)}
+.legend{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.leg{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer;padding:5px 10px;border-radius:var(--r);border:0.5px solid var(--bdr);background:var(--bg);user-select:none}
+.leg:hover{background:var(--bg1)}
+.ldot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.ctrls{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
+.btn{background:var(--bg);border:0.5px solid var(--bdr2);border-radius:var(--r);padding:7px 14px;cursor:pointer;font-size:13px;color:var(--text);display:inline-flex;align-items:center;gap:5px;line-height:1;font-family:inherit}
+.btn:hover{background:var(--bg1)}
+.btn:disabled{opacity:.38;cursor:not-allowed}
+.btn.on{background:var(--bg1)}
+.rlbl{font-size:14px;font-weight:600;color:var(--text);min-width:180px;text-align:center}
+.cr{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fsel{font-size:13px;color:var(--text);padding:7px 10px;border:0.5px solid var(--bdr2);border-radius:var(--r);background:var(--bg);cursor:pointer;font-family:inherit}
+.vtog{display:flex;border:0.5px solid var(--bdr2);border-radius:var(--r);overflow:hidden}
+.vbtn{background:transparent;border:none;padding:7px 14px;cursor:pointer;font-size:13px;color:var(--text2);font-family:inherit}
+.vbtn.on{background:var(--bg1);color:var(--text);font-weight:600}
+.sbar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.25rem}
+@media(max-width:560px){.sbar{grid-template-columns:repeat(2,1fr)}}
+.sc{background:var(--bg1);border-radius:var(--r);padding:10px 12px;text-align:center}
+.scn{font-size:24px;font-weight:600;color:var(--text)}
+.scl{font-size:11px;color:var(--text2);margin-top:2px}
+.sbox{background:var(--bg);border:0.5px solid var(--bdr);border-radius:var(--rl);padding:1.25rem;margin-bottom:1.25rem}
+.sbox h2{font-size:14px;font-weight:600;color:var(--text);margin-bottom:1rem}
+.srow{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.srow label{font-size:12px;color:var(--text2);min-width:110px}
+.srow input{flex:1;font-size:13px;padding:7px 9px;border:0.5px solid var(--bdr2);border-radius:var(--r);background:var(--bg1);color:var(--text);font-family:inherit}
+.sdiv{height:1px;background:var(--bdr);margin:14px 0}
+.ssec{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:10px}
+.sbtns{display:flex;gap:8px;margin-top:14px}
+.bblue{background:#185FA5;color:#fff;border:none;border-radius:var(--r);padding:8px 18px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit}
+.bblue:hover{background:#0C447C}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:800px){.cgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.cgrid{grid-template-columns:1fr}}
+.mc{background:var(--bg);border:0.5px solid var(--bdr);border-radius:var(--rl);padding:12px}
+.mn{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;text-align:center}
+.dgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.dh{font-size:10px;color:var(--text3);text-align:center;padding:3px 0}
+.dc{min-height:28px;border-radius:4px;display:flex;flex-direction:column;align-items:center;padding:2px 1px;cursor:pointer}
+.dc:hover{background:var(--bg1)}
+.dc.blank{pointer-events:none;opacity:0}
+.dc.wknd .dn{color:var(--text3)}
+.dc.today .dn{background:#185FA5;color:#fff;border-radius:50%}
+.dn{font-size:11px;width:18px;height:18px;display:flex;align-items:center;justify-content:center;color:var(--text2);flex-shrink:0}
+.dots{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-top:1px}
+.dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.lw{display:flex;flex-direction:column;gap:4px}
+.lm{margin-bottom:1.25rem}
+.lmt{font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid var(--bdr)}
+.lr{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--bg);border:0.5px solid var(--bdr);border-radius:var(--r);margin-bottom:4px}
+.ld{font-size:11px;color:var(--text2);min-width:26px;font-weight:600;padding-top:2px}
+.lt{font-size:10px;color:var(--text3);min-width:54px;padding-top:3px;white-space:nowrap}
+.badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;white-space:nowrap;flex-shrink:0}
+.stw{display:flex;flex-direction:column;gap:12px}
+.stc{background:var(--bg);border:0.5px solid var(--bdr);border-radius:var(--rl);padding:1rem 1.25rem}
+.stch{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.stg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;z-index:200;padding:1rem}
+.modal{background:var(--bg);border:0.5px solid var(--bdr2);border-radius:var(--rl);padding:1.25rem;width:400px;max-width:100%;max-height:90vh;overflow-y:auto}
+.mh{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.mh h3{font-size:15px;font-weight:600;color:var(--text)}
+.mcl{background:none;border:none;cursor:pointer;color:var(--text3);font-size:22px;line-height:1;padding:2px 4px;font-family:inherit}
+.mcl:hover{color:var(--text)}
+.mfld label{font-size:12px;color:var(--text2);display:block;margin-top:10px;margin-bottom:4px}
+.mfld input,.mfld select,.mfld textarea{width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--bdr2);border-radius:var(--r);background:var(--bg1);color:var(--text);font-family:inherit}
+.mfld textarea{resize:vertical;min-height:58px}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mdiv{border-top:0.5px solid var(--bdr);margin:12px 0 10px;padding-top:12px}
+.msec{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px}
+.mbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+.ei{border:0.5px solid var(--bdr);border-radius:var(--r);margin-bottom:6px;overflow:hidden}
+.ei.ap{border-color:var(--bdr2)}
+.em{display:flex;align-items:flex-start;gap:8px;padding:7px 8px}
+.etb{flex-shrink:0;margin-top:2px;min-width:46px}
+.et{font-size:10px;color:var(--text3);white-space:nowrap;line-height:1.5}
+.ea{display:flex;gap:1px;flex-shrink:0;margin-top:1px}
+.eb{background:none;border:none;cursor:pointer;color:var(--text3);padding:4px 5px;font-size:18px;border-radius:4px;display:inline-flex;align-items:center;font-family:inherit}
+.eb:hover{background:var(--bg1);color:var(--text)}
+.eb.del:hover{color:#c0392b}
+.eb.dup:hover{color:#185FA5}
+.subp{background:var(--bg1);border-top:0.5px solid var(--bdr);padding:10px 12px}
+.spt{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px}
+.drow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.drow input[type=date]{flex:1;font-size:12px;padding:6px 8px;border:0.5px solid var(--bdr2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:inherit}
+.sbtn{background:#185FA5;color:#fff;border:none;border-radius:var(--r);padding:6px 14px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit}
+.sbtn:hover{background:#0C447C}
+.cbtn{background:transparent;border:0.5px solid var(--bdr2);border-radius:var(--r);padding:6px 12px;cursor:pointer;font-size:12px;color:var(--text);font-family:inherit}
+.cbtn:hover{background:var(--bg1)}
+.edp{background:var(--bg1);border-top:0.5px solid var(--bdr);padding:10px 12px}
+.ept{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px}
+.epi{width:100%;font-size:12px;padding:6px 8px;border:0.5px solid var(--bdr2);border-radius:var(--r);background:var(--bg);color:var(--text);margin-bottom:6px;font-family:inherit}
+.epr2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
+.epl{font-size:11px;color:var(--text2);display:block;margin-bottom:3px}
+textarea.epi{resize:vertical;min-height:44px}
+.epbtns{display:flex;gap:6px;margin-top:6px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:var(--r);font-size:13px;z-index:999;pointer-events:none;white-space:nowrap;color:#fff}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hdr">
+    <div>
+      <h1 id="CT">2026-2027 Apprentice RTI Schedule</h1>
+      <div class="hdr-sub">Click any date to add, edit, or duplicate events &middot; Export CSV to save your changes</div>
+    </div>
+    <div class="legend" id="LEG"></div>
+  </div>
+  <div class="ctrls">
+    <button class="btn" id="PB" onclick="go(-1)">&#8592; Prev</button>
+    <button class="btn" id="NB" onclick="go(1)">Next &#8594;</button>
+    <span class="rlbl" id="RL"></span>
+    <div class="cr">
+      <select class="fsel" id="CF" onchange="setCF(this.value)"><option value="all">All cohorts</option></select>
+      <div class="vtog">
+        <button class="vbtn on" id="vG" onclick="sv('g')">Grid</button>
+        <button class="vbtn" id="vL" onclick="sv('l')">List</button>
+        <button class="vbtn" id="vS" onclick="sv('s')">Summary</button>
+      </div>
+      <button class="btn" id="SB" onclick="tgS()">&#9881; Settings</button>
+      <button class="btn" onclick="expCSV()">&#8595; Export CSV</button>
+    </div>
+  </div>
+  <div id="SP" style="display:none"></div>
+  <div class="sbar" id="SUM"></div>
+  <div id="CAL"></div>
+  <div id="MOD"></div>
+</div>
+<script>
+var CO=[{n:"2025 - Year 2",c:"#185FA5",l:"#C9DEFF"},{n:"2026 - Year 1",c:"#0F6E56",l:"#C2EFE1"},{n:"2024 - Year 3",c:"#993C1D",l:"#F9D5C8"}];
+var CT="2026-2027 Apprentice RTI Schedule";
+var ET=["Class day","Field day","Orientation","Exam","Make-up day","Other"];
+var MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+var DS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var EV=[{"name": "NCCER Year 1: Skid Steers", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 5, "day": 26}, {"name": "Field Day #12", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 5, "day": 27}, {"name": "NCCER Year 1: Skid Steers EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 6, "day": 3}, {"name": "New Apprentice Orientation SV", "cohort": 1, "type": "Orientation", "time": "13:30", "endtime": "15:30", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 6, "day": 9}, {"name": "New Apprentice Orientation TUS", "cohort": 1, "type": "Orientation", "time": "13:30", "endtime": "15:30", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, AZ 85714", "year": 2026, "month": 6, "day": 10}, {"name": "(SV) NCCER CORE: Introduction to Plan Reading", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 6, "day": 23}, {"name": "(TUS) NCCER CORE: Introduction to Plan Reading", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2026, "month": 6, "day": 24}, {"name": "Field Day #1", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 6, "day": 25}, {"name": "NCCER Year 1: Utility Tractors", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 6, "day": 31}, {"name": "Field Day #12", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 7, "day": 1}, {"name": "NCCER Year 1: Utility Tractors EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 7, "day": 7}, {"name": "(SV) NCCER CORE: Introduction to Construction Math", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 7, "day": 20}, {"name": "(TUS) NCCER CORE: Introduction to Construction Math", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2026, "month": 7, "day": 21}, {"name": "Field Day #2", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 7, "day": 22}, {"name": "NCCER Year 2: Excavation Math", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 7, "day": 28}, {"name": "Field Day #1", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 7, "day": 29}, {"name": "(SV) NCCER CORE: Introduction to Material Handling, Hand Tools, Power Tools", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 8, "day": 17}, {"name": "(TUS) NCCER CORE: Introduction to Material Handling, Hand Tools, Power Tools", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2026, "month": 8, "day": 18}, {"name": "Field Day #3", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 8, "day": 19}, {"name": "NCCER Year 2: Excavation Math cont.", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 8, "day": 25}, {"name": "Field Day #2", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 8, "day": 26}, {"name": "NCCER Year 2: Excavation Math EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 9, "day": 2}, {"name": "(SV) NCCER CORE: Safety, Communication Skills, Employability Skills", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 9, "day": 22}, {"name": "(TUS) NCCER CORE: Safety, Communication Skills, Employability Skills", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2026, "month": 9, "day": 23}, {"name": "Field Day #4", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 9, "day": 24}, {"name": "NCCER Year 2: Interpreting Civil Drawings", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 9, "day": 30}, {"name": "Field Day #3", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 9, "day": 31}, {"name": "(SV) NCCER CORE: EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 10, "day": 5}, {"name": "(TUS) NCCER CORE: EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Main Conference Room: 3949 E Irvington Road Tucson, Az 85714", "year": 2026, "month": 10, "day": 6}, {"name": "(SV) NCCER Year 1: Introduction to Heavy Equipment", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 10, "day": 12}, {"name": "(TUS) NCCER Year 1: Introduction to Heavy Equipment", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2026, "month": 10, "day": 13}, {"name": "Field Day #5", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 10, "day": 14}, {"name": "NCCER Year 2: Interpreting Civil Drawings cont. & Grades & Grading", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 10, "day": 20}, {"name": "Field Day #4", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 10, "day": 21}, {"name": "(SV) NCCER Year 1: Introduction to Heavy Equipment EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 11, "day": 3}, {"name": "(TUS) NCCER Year 1: Introduction to Heavy Equipment EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, Az 85714", "year": 2026, "month": 11, "day": 4}, {"name": "NCCER Year 2: Interpreting Civil Drawings EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 11, "day": 4}, {"name": "(SV) NCCER Year 1: Classification of Heavy Equipment", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2026, "month": 11, "day": 10}, {"name": "(TUS) NCCER Year 1: Classification of Heavy Equipment", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2026, "month": 11, "day": 11}, {"name": "Field Day #6", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 11, "day": 12}, {"name": "NCCER Year 2: Grades & Grading", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2026, "month": 11, "day": 18}, {"name": "Field Day #5", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2026, "month": 11, "day": 19}, {"name": "(SV) NCCER Year 1: Classification of Heavy Equipment EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 0, "day": 7}, {"name": "NCCER Year 2: Grades & Grading EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvington Rd. Tucson, AZ 85714", "year": 2027, "month": 0, "day": 8}, {"name": "(TUS) NCCER Year 1: Classification of Heavy Equipment EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 0, "day": 8}, {"name": "(SV) NCCER Year 1: Heavy Equipment Operation Safety", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 0, "day": 21}, {"name": "(TUS) NCCER Year 1: Heavy Equipment Operation Safety", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 0, "day": 22}, {"name": "Field Day #7", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 0, "day": 23}, {"name": "NCCER Year 2: Site Work", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2027, "month": 0, "day": 29}, {"name": "Field Day #6", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 0, "day": 30}, {"name": "(SV) NCCER Year 1: Heavy Equipment Operation Safety cont.", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 1, "day": 18}, {"name": "(TUS) NCCER Year 1: Heavy Equipment Operation Safety cont.", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 1, "day": 19}, {"name": "Field Day #8", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 1, "day": 20}, {"name": "NCCER Year 2: Site Work cont.", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2027, "month": 1, "day": 26}, {"name": "Field Day #7", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 1, "day": 27}, {"name": "(SV) NCCER Year 1: Heavy Equipment Operation Safety EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 2, "day": 4}, {"name": "(TUS) NCCER Year 1: Heavy Equipment Operation Safety EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 2, "day": 5}, {"name": "NCCER Year 2: Site Work EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvington Rd. Tucson, AZ 85714", "year": 2027, "month": 2, "day": 5}, {"name": "(SV) NCCER Year 1: Equipment Inspection and Readiness", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 2, "day": 18}, {"name": "(TUS) NCCER Year 1: Equipment Inspection and Readiness", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 2, "day": 19}, {"name": "Field Day #9", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 2, "day": 20}, {"name": "NCCER Year 2: Soils", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2027, "month": 2, "day": 26}, {"name": "Field Day #8", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 2, "day": 27}, {"name": "(SV) NCCER Year 1: Equipment Inspection and Readiness EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 3, "day": 1}, {"name": "(TUS) NCCER Year 1: Equipment Inspection and Readiness EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 3, "day": 2}, {"name": "(SV) NCCER Year 1: Introduction to Earthmoving", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 3, "day": 22}, {"name": "(TUS) NCCER Year 1: Introduction to Earthmoving", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 3, "day": 23}, {"name": "Field Day #10", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 3, "day": 24}, {"name": "NCCER Year 2: Soils cont.", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2027, "month": 3, "day": 30}, {"name": "Field Day #9", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 4, "day": 1}, {"name": "(SV) NCCER Year 1: Introduction to Earthmoving EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 4, "day": 6}, {"name": "(TUS) NCCER Year 1: Introduction to Earthmoving EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 4, "day": 7}, {"name": "NCCER Year 2: Soils EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvington Rd. Tucson, AZ 85714", "year": 2027, "month": 4, "day": 7}, {"name": "(SV) NCCER Year 1: Introduction to GPS", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 4, "day": 20}, {"name": "(TUS) NCCER Year 1: Introduction to GPS", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 4, "day": 21}, {"name": "Field Day #11", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 4, "day": 22}, {"name": "NCCER Year 2: Backhoes", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2027, "month": 4, "day": 28}, {"name": "Field Day #10", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 4, "day": 29}, {"name": "(SV) NCCER Year 1: Introduction to GPS EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 5, "day": 3}, {"name": "(TUS) NCCER Year 1: Introduction to GPS EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 5, "day": 4}, {"name": "(SV) NCCER Year 1: Skid Steers", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 5, "day": 17}, {"name": "(TUS) NCCER Year 1: Skid Steers", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 5, "day": 18}, {"name": "Field Day #11", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 5, "day": 19}, {"name": "NCCER Year 2: Backhoes cont.", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2027, "month": 5, "day": 25}, {"name": "Field Day #10", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 5, "day": 26}, {"name": "(SV) NCCER Year 1: Skid Steers EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 6, "day": 8}, {"name": "NCCER Year 2: Backhoes EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvington Rd. Tucson, AZ 85714", "year": 2027, "month": 6, "day": 9}, {"name": "(TUS) NCCER Year 1: Skid Steers EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 6, "day": 9}, {"name": "(SV) NCCER Year 1: Utility Tractors", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 6, "day": 22}, {"name": "(TUS) NCCER Year 1: Utility Tractors", "cohort": 1, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor: | Location: 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 6, "day": 23}, {"name": "Field Day #11", "cohort": 1, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 6, "day": 24}, {"name": "NCCER Year 2: Loaders", "cohort": 0, "type": "Class day", "time": "", "endtime": "", "note": "Student Instructor:  | Location: Bid Room, 3949 E. Irvingtom Rd. Tucson, AZ 85714", "year": 2027, "month": 6, "day": 30}, {"name": "Field Day #11", "cohort": 0, "type": "Field day", "time": "", "endtime": "", "note": "Location:  | Topics to be covered:  | 1.  | 2.  | 3.", "year": 2027, "month": 6, "day": 31}, {"name": "(SV) NCCER Year 1: Utility Tractors EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 1601 Paseo San Luis #202, Sierra Vista, AZ, 85635", "year": 2027, "month": 7, "day": 5}, {"name": "(TUS) NCCER Year 1: Utility Tractors EXAM", "cohort": 1, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E Irvington Rd. Tucson, Az 85714", "year": 2027, "month": 7, "day": 6}, {"name": "NCCER Year 2: Loaders EXAM", "cohort": 0, "type": "Exam", "time": "", "endtime": "", "note": "Location: Main Conference Room, 3949 E. Irvington Rd. Tucson, AZ 85714", "year": 2027, "month": 7, "day": 6}];
+var vm="g",off=0,sd=null,cf="all",ss=false,eidx=null,didx=null;
+function pad(n){return n<10?"0"+n:""+n;}
+function esc(s){var d=document.createElement("div");d.appendChild(document.createTextNode(String(s)));return d.innerHTML;}
+function t2m(t){if(!t)return 9999;var p=t.split(":");return parseInt(p[0])*60+parseInt(p[1]);}
+function ft(t){if(!t)return "";var p=t.split(":"),h=parseInt(p[0]),m=p[1],a=h>=12?"pm":"am";h=h%12||12;return h+":"+m+" "+a;}
+function fr(t,e){if(t&&e)return ft(t)+" - "+ft(e);if(t)return ft(t);return "--";}
+function srt(a){return a.slice().sort(function(x,y){return t2m(x.time)-t2m(y.time);});}
+function cn(i){return CO[i]?CO[i].n:"?";}
+function cc(i){return CO[i]?CO[i].c:"#888";}
+function cl(i){return CO[i]?CO[i].l:"#eee";}
+function toast(msg,bg){var el=document.createElement("div");el.className="toast";el.style.background=bg||"#1a1a18";el.textContent=msg;document.body.appendChild(el);setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},2500);}
+function expCSV(){
+  if(!EV.length){toast("No events.");return;}
+  var rows=[["Date","Weekday","Month","Year","Cohort","Type","Event Name","Start Time","End Time","Notes"]];
+  EV.slice().sort(function(a,b){return a.year!==b.year?a.year-b.year:a.month!==b.month?a.month-b.month:a.day!==b.day?a.day-b.day:t2m(a.time)-t2m(b.time);}).forEach(function(e){
+    var d=new Date(e.year,e.month,e.day);
+    rows.push([e.year+"-"+pad(e.month+1)+"-"+pad(e.day),DS[d.getDay()],MN[e.month],e.year,cn(e.cohort),e.type,'"'+e.name.replace(/"/g,'""')+'"',e.time?ft(e.time):"",e.endtime?ft(e.endtime):"",'"'+(e.note||"").replace(/"/g,'""')+'"']);
+  });
+  var blob=new Blob([rows.map(function(r){return r.join(",");}).join("\n")],{type:"text/csv"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="apprenticeship_schedule.csv";document.body.appendChild(a);a.click();document.body.removeChild(a);toast("CSV downloaded!");
+}
+function tgS(){ss=!ss;document.getElementById("SB").classList.toggle("on",ss);rndS();}
+function rndS(){
+  var el=document.getElementById("SP");el.style.display=ss?"block":"none";
+  if(!ss){el.innerHTML="";return;}
+  var h='<div class="sbox"><h2>Settings</h2><div class="srow"><label>Calendar title</label><input type="text" id="st" value="'+esc(CT)+'"></div><div class="sdiv"></div><div class="ssec">Cohort names</div>';
+  CO.forEach(function(c,i){h+='<div class="srow"><div class="ldot" style="background:'+c.c+'"></div><label>Cohort '+String.fromCharCode(65+i)+'</label><input type="text" id="sc'+i+'" value="'+esc(c.n)+'"></div>';});
+  h+='<div class="sbtns"><button class="bblue" onclick="apS()">Apply</button><button class="btn" onclick="tgS()">Cancel</button></div></div>';
+  el.innerHTML=h;
+}
+function apS(){
+  var t=document.getElementById("st").value.trim();
+  if(t){CT=t;document.getElementById("CT").textContent=CT;document.title=CT;}
+  CO.forEach(function(c,i){var v=document.getElementById("sc"+i).value.trim();if(v)c.n=v;});
+  ss=false;document.getElementById("SB").classList.remove("on");document.getElementById("SP").style.display="none";document.getElementById("SP").innerHTML="";
+  rbF();rndL();rnd();toast("Settings saved!");
+}
+function rbF(){
+  var sel=document.getElementById("CF"),cur=sel.value,h='<option value="all">All cohorts</option>';
+  CO.forEach(function(c,i){h+='<option value="'+i+'">'+esc(c.n)+' only</option>';});
+  sel.innerHTML=h;sel.value=cur;
+}
+function rndL(){
+  var h="";CO.forEach(function(c,i){h+='<div class="leg" onclick="flC('+i+')"><div class="ldot" style="background:'+c.c+'"></div><span>'+esc(c.n)+'</span></div>';});
+  document.getElementById("LEG").innerHTML=h;
+}
+function flC(i){cf=cf===String(i)?"all":String(i);document.getElementById("CF").value=cf;rnd();}
+function setCF(v){cf=v;rnd();}
+function gvm(){
+  if(off===0)return [{y:2026,m:5},{y:2026,m:6},{y:2026,m:7},{y:2026,m:8},{y:2026,m:9},{y:2026,m:10},{y:2026,m:11},{y:2027,m:0}];
+  if(off===1)return [{y:2027,m:1},{y:2027,m:2},{y:2027,m:3},{y:2027,m:4},{y:2027,m:5},{y:2027,m:6},{y:2027,m:7},{y:2027,m:8}];
+  return [{y:2027,m:9},{y:2027,m:10},{y:2027,m:11}];
+}
+function dim(y,m){return new Date(y,m+1,0).getDate();}
+function fdw(y,m){return new Date(y,m,1).getDay();}
+function efd(y,m,d){return srt(EV.filter(function(e){return(cf==="all"||String(e.cohort)===cf)&&e.year===y&&e.month===m&&e.day===d;}));}
+function updSum(){
+  var vis=EV.filter(function(e){return cf==="all"||String(e.cohort)===cf;});
+  var cl2=vis.filter(function(e){return e.type==="Class day";}).length,fd=vis.filter(function(e){return e.type==="Field day";}).length;
+  document.getElementById("SUM").innerHTML='<div class="sc"><div class="scn">'+EV.length+'</div><div class="scl">Total events</div></div><div class="sc"><div class="scn">'+cl2+'</div><div class="scl">Class days</div></div><div class="sc"><div class="scn">'+fd+'</div><div class="scl">Field days</div></div><div class="sc"><div class="scn">'+(vis.length-cl2-fd)+'</div><div class="scl">Other</div></div>';
+}
+function rndG(){
+  var ms=gvm(),td=new Date(),ty=td.getFullYear(),tm=td.getMonth(),tdd=td.getDate(),h='<div class="cgrid">';
+  ms.forEach(function(ym){
+    var y=ym.y,m=ym.m,tot=dim(y,m),st=fdw(y,m);
+    h+='<div class="mc"><div class="mn">'+MN[m]+' '+y+'</div><div class="dgrid">';
+    DS.forEach(function(d){h+='<div class="dh">'+d+'</div>';});
+    for(var b=0;b<st;b++){h+='<div class="dc blank"><div class="dn"></div></div>';}
+    for(var d=1;d<=tot;d++){
+      var dw=(st+d-1)%7,it=(y===ty&&m===tm&&d===tdd),wk=(dw===0||dw===6),evs=efd(y,m,d),dh="";
+      evs.forEach(function(e){dh+='<div class="dot" style="background:'+cc(e.cohort)+'"></div>';});
+      h+='<div class="dc'+(it?" today":"")+(wk?" wknd":"")+'" onclick="opD('+y+','+m+','+d+')" title="'+(evs.length?esc(evs.map(function(e){return e.name;}).join(", ")):"Add event")+'">';
+      h+='<div class="dn">'+d+'</div>'+(dh?'<div class="dots">'+dh+'</div>':'')+'</div>';
+    }
+    h+='</div></div>';
+  });
+  document.getElementById("CAL").innerHTML=h+'</div>';
+}
+function rndList(){
+  var ms=gvm(),h='<div class="lw">',any=false;
+  ms.forEach(function(ym){
+    var y=ym.y,m=ym.m,tot=dim(y,m),me=[];
+    for(var d=1;d<=tot;d++){efd(y,m,d).forEach(function(e){me.push({e:e,d:d});});}
+    if(!me.length)return;any=true;
+    h+='<div class="lm"><div class="lmt">'+MN[m]+' '+y+' <span style="font-size:12px;color:#888780;font-weight:400">('+me.length+' event'+(me.length!==1?"s":"")+')</span></div>';
+    me.forEach(function(it){
+      var e=it.e;
+      h+='<div class="lr"><div class="ld">'+pad(it.d)+'</div><div class="lt">'+fr(e.time,e.endtime)+'</div>';
+      h+='<div class="ldot" style="background:'+cc(e.cohort)+';margin-top:3px;flex-shrink:0"></div>';
+      h+='<div style="flex:1;padding-left:4px"><div style="font-size:13px;">'+esc(e.name)+'</div>';
+      h+='<div style="font-size:11px;color:#888780;">'+esc(cn(e.cohort))+' &middot; '+esc(e.type)+'</div></div>';
+      h+='<span class="badge" style="background:'+cl(e.cohort)+';color:'+cc(e.cohort)+'">'+esc(e.type)+'</span></div>';
+    });
+    h+='</div>';
+  });
+  if(!any)h+='<p style="text-align:center;color:#888780;font-size:13px;padding:2rem 0">No events for this period.</p>';
+  document.getElementById("CAL").innerHTML=h+'</div>';
+}
+function rndSt(){
+  var h='<div class="stw">';
+  CO.forEach(function(c,i){
+    var evs=EV.filter(function(e){return e.cohort===i;}),cl2=evs.filter(function(e){return e.type==="Class day";}).length,fd=evs.filter(function(e){return e.type==="Field day";}).length;
+    h+='<div class="stc"><div class="stch"><div class="ldot" style="background:'+c.c+'"></div><span style="font-size:15px;font-weight:600;">'+esc(c.n)+'</span><span style="margin-left:auto;font-size:12px;color:#888780">'+evs.length+' total</span></div>';
+    h+='<div class="stg"><div class="sc"><div class="scn">'+cl2+'</div><div class="scl">Class days</div></div><div class="sc"><div class="scn">'+fd+'</div><div class="scl">Field days</div></div><div class="sc"><div class="scn">'+(evs.length-cl2-fd)+'</div><div class="scl">Other</div></div></div></div>';
+  });
+  document.getElementById("CAL").innerHTML=h+'</div>';
+}
+function rnd(){
+  updSum();
+  var ms=gvm(),f=ms[0],l=ms[ms.length-1];
+  document.getElementById("RL").textContent=MN[f.m].slice(0,3)+" "+f.y+" - "+MN[l.m].slice(0,3)+" "+l.y;
+  document.getElementById("PB").disabled=(off<=0);
+  document.getElementById("NB").disabled=(off>=2);
+  if(vm==="l")rndList();else if(vm==="s")rndSt();else rndG();
+}
+function go(d){off+=d;rnd();}
+function sv(v){vm=v;document.getElementById("vG").classList.toggle("on",v==="g");document.getElementById("vL").classList.toggle("on",v==="l");document.getElementById("vS").classList.toggle("on",v==="s");rnd();}
+function opD(y,m,d){sd={y:y,m:m,d:d};eidx=null;didx=null;rndM();}
+function clM(){sd=null;eidx=null;didx=null;document.getElementById("MOD").innerHTML="";}
+function rndM(){
+  if(!sd){document.getElementById("MOD").innerHTML="";return;}
+  var y=sd.y,m=sd.m,d=sd.d,devs=srt(EV.filter(function(e){return e.year===y&&e.month===m&&e.day===d;}));
+  var h='<div class="overlay" onclick="bgC(event)"><div class="modal" onclick="event.stopPropagation()">';
+  h+='<div class="mh"><h3>'+MN[m]+' '+d+', '+y+'</h3><button class="mcl" onclick="clM()">&times;</button></div>';
+  devs.forEach(function(e){
+    var idx=EV.indexOf(e),isE=(eidx===idx),isD=(didx===idx);
+    h+='<div class="ei'+(isE||isD?" ap":"")+'">';
+    h+='<div class="em"><div class="etb"><div class="ldot" style="background:'+cc(e.cohort)+'"></div>';
+    if(e.time)h+='<div class="et" style="margin-top:4px">'+ft(e.time)+'</div>';
+    if(e.endtime)h+='<div class="et">'+ft(e.endtime)+'</div>';
+    h+='</div><div style="flex:1"><div style="font-size:13px;">'+esc(e.name)+'</div>';
+    h+='<div style="font-size:11px;color:#888780;">'+esc(cn(e.cohort))+' &middot; '+esc(e.type)+'</div></div>';
+    h+='<div class="ea"><button class="eb dup" onclick="stD('+idx+')" title="Duplicate">&#10063;</button>';
+    h+='<button class="eb" onclick="stE('+idx+')" title="Edit">&#9998;</button>';
+    h+='<button class="eb del" onclick="delE('+idx+')" title="Delete">&#10005;</button></div></div>';
+    if(isD){h+='<div class="subp"><div class="spt">Copy to another date</div><div class="drow"><input type="date" id="dpd'+idx+'" min="2026-06-01" max="2027-12-31"><button class="sbtn" onclick="cfD('+idx+')">Copy</button></div><button class="cbtn" onclick="cnD()">Cancel</button></div>';}
+    if(isE){
+      h+='<div class="edp"><div class="ept">Editing event</div>';
+      h+='<input class="epi" type="text" id="en'+idx+'" value="'+esc(e.name)+'">';
+      h+='<div class="epr2"><select class="epi" style="margin:0" id="ec'+idx+'">';
+      CO.forEach(function(c,ci){h+='<option value="'+ci+'"'+(ci===e.cohort?" selected":"")+'>'+esc(c.n)+'</option>';});
+      h+='</select><select class="epi" style="margin:0" id="et'+idx+'">';
+      ET.forEach(function(t){h+='<option value="'+esc(t)+'"'+(t===e.type?" selected":"")+'>'+esc(t)+'</option>';});
+      h+='</select></div><div class="epr2"><div><span class="epl">Start time</span><input class="epi" style="margin:0" type="time" id="es'+idx+'" value="'+(e.time||"")+'"></div><div><span class="epl">End time</span><input class="epi" style="margin:0" type="time" id="ee'+idx+'" value="'+(e.endtime||"")+'"></div></div>';
+      h+='<textarea class="epi" id="eno'+idx+'" placeholder="Notes">'+esc(e.note||"")+'</textarea>';
+      h+='<div class="epbtns"><button class="sbtn" onclick="svE('+idx+')">Save</button><button class="cbtn" onclick="cnE()">Cancel</button></div></div>';
+    }
+    h+='</div>';
+  });
+  if(!devs.length)h+='<p style="font-size:12px;color:#888780;margin-bottom:8px">No events on this date yet.</p>';
+  if(eidx===null&&didx===null){
+    h+='<div class="mdiv"><div class="msec">Add event</div><div class="mfld"><label>Event name</label><input type="text" id="evN" placeholder="e.g. Safety training"></div>';
+    h+='<div class="fr2"><div class="mfld"><label>Cohort</label><select id="evC">';
+    CO.forEach(function(c,i){h+='<option value="'+i+'">'+esc(c.n)+'</option>';});
+    h+='</select></div><div class="mfld"><label>Type</label><select id="evT">';
+    ET.forEach(function(t){h+='<option value="'+esc(t)+'">'+esc(t)+'</option>';});
+    h+='</select></div></div><div class="fr2"><div class="mfld"><label>Start time</label><input type="time" id="evS"></div><div class="mfld"><label>End time</label><input type="time" id="evE"></div></div>';
+    h+='<div class="mfld"><label>Notes (optional)</label><textarea id="evNo" placeholder="Location, instructor..."></textarea></div>';
+    h+='<div class="mbtns"><button class="btn" onclick="clM()">Cancel</button><button class="bblue" onclick="addE()">Add event</button></div></div>';
+  }
+  h+='</div></div>';
+  document.getElementById("MOD").innerHTML=h;
+  if(eidx===null&&didx===null)setTimeout(function(){var x=document.getElementById("evN");if(x)x.focus();},30);
+  if(didx!==null)setTimeout(function(){var x=document.getElementById("dpd"+didx);if(x)x.focus();},30);
+  if(eidx!==null)setTimeout(function(){var x=document.getElementById("en"+eidx);if(x){x.focus();x.select();}},30);
+}
+function stD(i){didx=i;eidx=null;rndM();}
+function cnD(){didx=null;rndM();}
+function cfD(i){
+  var el=document.getElementById("dpd"+i);if(!el||!el.value){if(el)el.focus();return;}
+  var p=el.value.split("-"),y=parseInt(p[0]),m=parseInt(p[1])-1,d=parseInt(p[2]);
+  var src=EV[i];EV.push({name:src.name,cohort:src.cohort,type:src.type,time:src.time||"",endtime:src.endtime||"",note:src.note||"",year:y,month:m,day:d});
+  didx=null;rnd();rndM();toast("Copied to "+MN[m]+" "+d+", "+y,"#185FA5");
+}
+function stE(i){eidx=i;didx=null;rndM();}
+function cnE(){eidx=null;rndM();}
+function svE(i){
+  var n=document.getElementById("en"+i).value.trim();if(!n)return;
+  EV[i].name=n;EV[i].cohort=parseInt(document.getElementById("ec"+i).value);EV[i].type=document.getElementById("et"+i).value;
+  EV[i].time=document.getElementById("es"+i).value||"";EV[i].endtime=document.getElementById("ee"+i).value||"";
+  EV[i].note=document.getElementById("eno"+i).value.trim();
+  eidx=null;rnd();rndM();toast("Event updated!");
+}
+function bgC(e){if(e.target===e.currentTarget)clM();}
+function addE(){
+  var n=document.getElementById("evN").value.trim();if(!n){document.getElementById("evN").focus();return;}
+  EV.push({name:n,cohort:parseInt(document.getElementById("evC").value),type:document.getElementById("evT").value,time:document.getElementById("evS").value||"",endtime:document.getElementById("evE").value||"",note:document.getElementById("evNo").value.trim(),year:sd.y,month:sd.m,day:sd.d});
+  rnd();rndM();
+}
+function delE(i){
+  var e=EV[i];EV.splice(i,1);eidx=null;didx=null;
+  if(!EV.filter(function(x){return x.year===e.year&&x.month===e.month&&x.day===e.day;}).length)clM();else rndM();rnd();
+}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){if(ss)tgS();else if(didx!==null)cnD();else if(eidx!==null)cnE();else clM();}});
+document.getElementById("CT").textContent=CT;
+document.title=CT;
+rbF();rndL();rnd();
+</script>
+</body>
+</html>
